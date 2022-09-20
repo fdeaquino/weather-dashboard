@@ -9,6 +9,47 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
+    <h1>Weather Dashboard</h1>
+    <div class="content-container">
+        <div class="row">
+            <!-- LEFT CONTAINER containing city search input/button and history -->
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-12" id="city-search-container">
+                        <!-- Search for city header -->
+                        <h4>Search for a City:</h4>
+                        <!-- TEXT INPUT w/placeholder of "Houston" -->
+                        <input type="text" id="searchCity" placeholder="Houston"/>
+                        <!-- Submit button -->
+                        <button type="submit" id="submit-button">Search</button>
+                        <div class="col-12" id="saved-cities">
+                            <!-- Search history with Dynamic HTML buttons -->
+                            City History
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- RIGHT CONTAINER containing current weather and 5 day forecast -->
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-12" id="current-weather">
+                        <!-- Current weather will go here -->
+                        Current Weather for City
+                    </div>
+                    <div class="row justify-content-between" id="five-day-forecast">
+                        <!-- Five Day forecast will go here -->
+                        <div class="col-2" id="day1">Day 1</div>
+                        <div class="col-2" id="day2">Day 2</div>
+                        <div class="col-2" id="day3">Day 3</div>
+                        <div class="col-2" id="day4">Day 4</div>
+                        <div class="col-2" id="day5">Day 5</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="./assets/js/weather-dashboard.js"></script>
 </body>

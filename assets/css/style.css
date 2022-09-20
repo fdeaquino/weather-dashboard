@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+    background: linear-gradient(to right, #0000cc 0%, #000066 100%);
+}
+
+input {
+    width: 100%;
+    border-radius: 5px;
+}
+
+button {
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+    background-color: RGB(123, 178, 221);
+    border-radius: 5px;
+}
+
+#city-search-container {
+    padding: 10px;
+    border-bottom: 2px solid gray;
+}

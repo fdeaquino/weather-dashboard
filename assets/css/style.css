@@ -27,8 +27,9 @@ button {
     border-bottom: 2px solid gray;
 }
 
+/* Changed background color to lighter gray because dark gray wouldn't allow user to see 'rain' on icons */
 #day1, #day2, #day3, #day4, #day5 {
-    background-color: rgb(54, 69, 79);
+    background-color: #8C9CAD;
     font-size: small;
     padding-top: 10px;
     color: white;

@@ -8,14 +8,16 @@ const currentCityName = document.querySelector("#current-city-name");
 const temp = document.querySelector("#current-temp");
 const wind = document.querySelector("#current-wind");
 const humidity = document.querySelector("#current-humidity");
-const uvIndex = document.querySelector("#current-uv-index");
+// TA said not to include uv data in project - deleted variable
 const image = document.querySelector("#current-icon");
 const apiKey = "e350d44f0fd3cd89fc464afb4f48dec4";
 let cityArr = [];
 
+// fetches current and future weather information and other data for a city
 function fetchCurrent(city) {
     const cityValue = search.value;
 
+    // query parameter to include imperial values
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&units=imperial&appid=" + apiKey)
         // console.log("https://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&units=imperial" + "&appid=" + apiKey)
 
@@ -25,22 +27,23 @@ function fetchCurrent(city) {
     })
     .then(function(response) {
         let currentDate = new Date(response.dt * 1000).toLocaleDateString("en-US");
-
+        // displays city name and current date in the current weather container
         currentCityName.textContent = response.name + " " + "(" + (currentDate) + ")";
-
+        // displays current weather icon in current weather container
         let weatherIcon = response.weather[0].icon;
         image.setAttribute("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
-
+        // displays current temp wind and humidity in current weather container
         temp.textContent = "Temp: " + response.main.temp + "℉";
         wind.textContent = "Wind: " + response.wind.speed + " mph";
         humidity.textContent = "Humidity: " + response.main.humidity + "%";
 
+        // will fetch data for five day forecast
         return fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&units=imperial&appid=" + apiKey)
 
         .then(function(response) {
             return response.json();
         })
-
+        // for loop iterates five times and displays date, weather icon, temp, wind, and humidity for five day forecast
         .then(function(response) {
             for (i = 1; i < 6; i++) {
                 let dayForecast = document.querySelector("#dia-" + [i]);
@@ -65,3 +68,21 @@ searchForm.addEventListener("submit", function(event) {
     containerForCurrentCityWeather.style.display = "block";
     containerForFiveDayForecast.style.display = "flex";
 });
+
+
+// GIVEN a weather dashboard with form inputs
+// WHEN I search for a city
+// THEN I am presented with current and future conditions for that city and that city is added to the search history
+        // ALMOST DONE - TODO: NEED TO ADD CITY TO SEARCH HISTORY
+
+// WHEN I view current weather conditions for that city
+// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
+        // DONE
+
+// WHEN I view future weather conditions for that city
+// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+        // DONE
+
+// WHEN I click on a city in the search history
+// THEN I am again presented with current and future conditions for that city
+        // AMOST DONE - TODO: TURN THE CITY IN SEARCH HISTORY INTO A BUTTON

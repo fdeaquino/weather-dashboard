@@ -26,3 +26,20 @@ button {
     padding: 10px;
     border-bottom: 2px solid gray;
 }
+
+#day1, #day2, #day3, #day4, #day5 {
+    background-color: rgb(54, 69, 79);
+    font-size: small;
+    padding-top: 10px;
+    color: white;
+}
+
+#five-day-forecast {
+    display: none;
+}
+
+#current-weather {
+    border: 1px solid black;
+    margin-bottom: 10px;
+    display: none;
+}

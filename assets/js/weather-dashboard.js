@@ -11,12 +11,20 @@ const humidity = document.querySelector("#current-humidity");
 // TA said not to include uv data in project - deleted variable
 const image = document.querySelector("#current-icon");
 const apiKey = "e350d44f0fd3cd89fc464afb4f48dec4";
-let cityArr = [];
+let cityArr;
+let cityValue;
+
+if (localStorage.getItem("cities")) {
+    cityArr = JSON.parse(localStorage.getItem("cities"));
+} else {
+    cityArr =[]
+}
+
+localStorage.setItem("cities", JSON.stringify(cityArr))
+const savedCityHistory = JSON.parse(localStorage.getItem("cities"));
 
 // fetches current and future weather information and other data for a city
 function fetchCurrent(city) {
-    const cityValue = search.value;
-
     // query parameter to include imperial values
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&units=imperial&appid=" + apiKey)
         // console.log("https://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&units=imperial" + "&appid=" + apiKey)
@@ -62,18 +70,53 @@ function fetchCurrent(city) {
     });
 }
 
-searchForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    fetchCurrent();
+// sets searched cities into localStorage
+function setStorage() {
+    cityArr.push(search.value);
+    localStorage.setItem("cities", JSON.stringify(cityArr))
+};
+
+const eventHandler = function(event) {
+    event.preventDefault;
     containerForCurrentCityWeather.style.display = "block";
     containerForFiveDayForecast.style.display = "flex";
+    cityValue = $(this).val();
+    fetchCurrent(cityValue);
+};
+
+// A button is created for each city searched
+function makeBtns(text) {
+    let savedCityBtns = document.createElement("button");
+    savedCityBtns.textContent = text;
+    savedCityBtns.className = "savedCityBtns";
+    savedCityBtns.setAttribute("type", "submit");
+    savedCityBtns.setAttribute("value", text);
+    savedCityBtns.addEventListener("click", eventHandler);
+    containerForSaved.appendChild(savedCityBtns);
+};
+
+savedCityHistory.forEach(function(item) {
+    makeBtns(item);
 });
 
+searchForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    cityValue = search.value;
+    fetchCurrent(cityValue);
+    containerForCurrentCityWeather.style.display = "block";
+    containerForFiveDayForecast.style.display = "flex";
+    setStorage();
+    JSON.parse(localStorage.getItem("cities"));
+    makeBtns(search.value);
+    search.value = "";
+});
+
+$(".savedCityBtns").click(eventHandler);
 
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
-        // ALMOST DONE - TODO: NEED TO ADD CITY TO SEARCH HISTORY
+        // DONE
 
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
@@ -85,4 +128,4 @@ searchForm.addEventListener("submit", function(event) {
 
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
-        // AMOST DONE - TODO: TURN THE CITY IN SEARCH HISTORY INTO A BUTTON
+        // DONE

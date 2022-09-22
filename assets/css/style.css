@@ -43,3 +43,7 @@ button {
     margin-bottom: 10px;
     display: none;
 }
+
+#current-city-name {
+    font-weight: bold;
+}

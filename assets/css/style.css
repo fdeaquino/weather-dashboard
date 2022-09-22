@@ -47,3 +47,7 @@ button {
 #current-city-name {
     font-weight: bold;
 }
+
+.savedCityBtns {
+    background-color: rgb(131,145,161);
+}
